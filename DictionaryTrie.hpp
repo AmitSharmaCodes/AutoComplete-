@@ -8,6 +8,7 @@
 
 #include <vector>
 #include <string>
+#include <unordered_map>
 
 /**
  *  The class for a dictionary ADT, implemented as a trie
@@ -15,6 +16,28 @@
  *  or a ternary search trie, but you must use one or the other.
  *
  */
+class TNode
+{
+
+public:
+
+	bool isWord;
+	TNode* left;
+	TNode* right;
+	TNode* middle;
+	TNode* parent;
+	char text;
+	unsigned int freq;
+
+	TNode(char c, bool word, int frequ = 0, TNode* l = 0, TNode* r = 0, TNode* m = 0)
+		:text(c), isWord(word), freq(frequ), left(l), right(r), middle(m) { }
+
+
+	/** Less-than comparison, so TNode will work in std::priority_queue
+	*/
+	//bool operator<(const TNode& other) const;
+};
+
 class DictionaryTrie
 {
 public:
@@ -48,7 +71,9 @@ public:
   ~DictionaryTrie();
 
 private:
-  // Add your own data members and methods here
+	TNode* root;
 };
+
+
 
 #endif // DICTIONARY_TRIE_HPP
