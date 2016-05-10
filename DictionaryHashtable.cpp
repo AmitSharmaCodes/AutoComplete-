@@ -16,7 +16,7 @@ bool DictionaryHashtable::insert(std::string word)
 /* Return true if word is in the dictionary, and false otherwise */
 bool DictionaryHashtable::find(std::string word) const
 {
-	unordered_set<string>::iterator iter = set.find(word);
+	auto iter = set.find(word);
 	if (iter == set.end())
 		return false;
 	return true;
