@@ -29,9 +29,7 @@ public:
 	char text;
 	unsigned int freq;
 
-	TNode(char c, bool word, int frequ = 0, TNode* l = 0, TNode* r = 0, TNode* m = 0)
-		:text(c), isWord(word), freq(frequ), left(l), right(r), middle(m) { }
-
+	TNode(char c, bool word, unsigned int freq = 0);
 
 	/** Less-than comparison, so TNode will work in std::priority_queue
 	*/

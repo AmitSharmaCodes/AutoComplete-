@@ -18,7 +18,7 @@ bool DictionaryTrie::insert(std::string word, unsigned int freq)
 	bool accepted = false;
 	bool isword;
 	//go through each letter in the string
-	for (int i = 0; i < word.length(); i++)
+	for (unsigned int i = 0; i < word.length(); i++)
 	{
 		//if this is the end of the word
 		isword = false;
@@ -74,7 +74,7 @@ bool DictionaryTrie::insert(std::string word, unsigned int freq)
 bool DictionaryTrie::find(std::string word) const
 {
 	TNode* current = root;
-	for (int i = 0; i < word.length(); i++)
+	for (unsigned int i = 0; i < word.length(); i++)
 	{
 		bool isword = false;
 		if (i == word.length() - 1)
@@ -129,3 +129,9 @@ DictionaryTrie::~DictionaryTrie(){}
 //		return true;
 //}
 
+TNode::TNode(char c, bool word, unsigned int fre)
+{
+	text = c;
+	isWord = word;
+	freq = fre;
+}
