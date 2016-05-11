@@ -15,7 +15,6 @@ bool DictionaryTrie::insert(std::string word, unsigned int freq)
 
 	//start at top
 	TNode* current = root;
-	bool accepted = false;
 	bool isword;
 	//go through each letter in the string
 	for (unsigned int i = 0; i < word.length(); i++)
@@ -27,40 +26,57 @@ bool DictionaryTrie::insert(std::string word, unsigned int freq)
 		//get current character
 		char currentChar = word.at(i);
 
+		//if the root hasnt been assigned assign it to the first letter
 		if (root == NULL) {
-			root = new TNode(currentChar, isword);
+			root = new TNode(currentChar, isword, freq);
 			current = root;
 			
 		}
 		//keep on going through the list til a node is accepted
 		//for the character
+		bool accepted = false;
 		while (true)
 		{
+			//if the last letter in the trie was accepted go down the middle
+			//and update max Frequency
 			if (accepted)
 			{
 				if(current->middle == NULL)
 					current->middle = new TNode(currentChar, isword, freq);
+				if (current->maxFreq < freq)
+					current->maxFreq = freq;
 				current = current->middle;
 				accepted = false;
 			}
-
+			//if the current letter is less than the current node go left
+			//update max frequency
 			if (currentChar < current->text)
 			{
 				if (current->left == NULL)
 					current->left = new TNode(currentChar, isword, freq);
+				if (current->maxFreq < freq)
+					current->maxFreq = freq;
 				current = current->left;
 			}
+			//if the current letter is greater than the current node go right
+			//update max frequency
 			else if (currentChar > current->text)
 			{
 				if (current->right == NULL)
 					current->right = new TNode(currentChar, isword, freq);
+				if (current->maxFreq < freq)
+					current->maxFreq = freq;
 				current = current->right;
 			}
+			//the current letter is equal to the node, accept it
+			//also check if this is the last letter, if so, this 
+			//node denotes the end of a word
 			else
 			{
 				if (isword) {
 					current->isWord = true;
 					current->freq = freq;
+					current->wholeWord = word;
 				}
 				accepted = true;
 				break;
@@ -102,6 +118,7 @@ bool DictionaryTrie::find(std::string word) const
 		
 		}
 	}
+	return false;
 }
 
 /* Return up to num_completions of the most frequent completions
@@ -120,8 +137,22 @@ std::vector<std::string> DictionaryTrie::predictCompletions(std::string prefix, 
   return words;
 }
 
+
+
 /* Destructor */
-DictionaryTrie::~DictionaryTrie(){}
+DictionaryTrie::~DictionaryTrie(){
+	deleteAll(root);
+}
+
+void DictionaryTrie::deleteAll(TNode * n)
+{
+	if (n == NULL)
+		return;
+	deleteAll(n->left);
+	deleteAll(n->middle);
+	deleteAll(n->right);
+	delete n;
+}
 
 //bool TNode::operator<(const TNode & other) const
 //{
@@ -134,4 +165,6 @@ TNode::TNode(char c, bool word, unsigned int fre)
 	text = c;
 	isWord = word;
 	freq = fre;
+	wholeWord = "";
+	maxFreq = fre;
 }

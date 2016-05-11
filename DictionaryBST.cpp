@@ -7,7 +7,6 @@ DictionaryBST::DictionaryBST(){}
 /* Insert a word into the dictionary. */
 bool DictionaryBST::insert(std::string word)
 {
-	bool test;
 	if (find(word))
 		return false;
 

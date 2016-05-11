@@ -11,6 +11,8 @@ int main()
 	DictionaryHashtable dic2;
 	DictionaryBST dic3;
 
+	if (dic.insert("", 0))
+		cout << "6" << endl;
 	dic.insert("apple", 5);
 	dic.insert("bat", 5);
 	dic.insert("blue", 5);
@@ -29,5 +31,12 @@ int main()
 		cout << "it works" << endl;
 	if (dic.find("blue"))
 		cout << "it works" << endl;
+	if (!dic.find("blu"))
+		cout << "it works" << endl;
+
+	if (!dic.insert("apple", 5))
+		cout << "it works" << endl;
+	
+		
 	return 0;
 }

@@ -16,6 +16,7 @@
  *  or a ternary search trie, but you must use one or the other.
  *
  */
+using namespace std;
 class TNode
 {
 
@@ -27,6 +28,8 @@ public:
 	TNode* middle;
 	TNode* parent;
 	char text;
+	string wholeWord;
+	unsigned int maxFreq;
 	unsigned int freq;
 
 	TNode(char c, bool word, unsigned int freq = 0);
@@ -70,6 +73,8 @@ public:
 
 private:
 	TNode* root;
+	
+	static void deleteAll(TNode* n);
 };
 
 
