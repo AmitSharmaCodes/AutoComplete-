@@ -12,7 +12,7 @@
 //	DictionaryBST dic3;
 //
 //
-//	dic.insert("basketball", 20);
+//	dic.insert("apple", 400);
 //	dic.insert("append", 400);
 //	dic.insert("apply", 30);
 //	dic.insert("ambiant", 20);
@@ -22,8 +22,7 @@
 //	dic.insert("bat", 5);
 //	dic.insert("blue", 5);
 //
-//	if (!dic.insert("basketball", 20))
-//		cout << "didnt insert basketball again";
+//
 //
 //	if (dic.find("apple"))
 //		cout << "apple found" << endl;
