@@ -46,6 +46,7 @@ int main(int argc, char *argv[]) {
 		cout << min_size + i * step_size << "\t" << done << endl;
 	}
 	in.close();
+	cout << endl;
 
 	in.open(dictfile, ios::binary);
 	cout << "DictionaryHashtable" << endl;
@@ -72,7 +73,7 @@ int main(int argc, char *argv[]) {
 		cout << min_size + i * step_size << "\t" << done << endl;
 	}
 	in.close();
-
+	cout << endl;
 
 	in.open(dictfile, ios::binary);
 	cout << "DictionaryTrie" << endl;
@@ -99,5 +100,6 @@ int main(int argc, char *argv[]) {
 		cout << min_size + i * step_size << "\t" << done << endl;
 	}
 	in.close();
+
 	return 0;
 }
