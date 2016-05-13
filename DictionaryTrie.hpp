@@ -17,6 +17,8 @@
  *
  */
 using namespace std;
+
+
 class TNode
 {
 
@@ -34,9 +36,20 @@ public:
 
 	TNode(char c, bool word, unsigned int freq = 0);
 
-	/** Less-than comparison, so TNode will work in std::priority_queue
-	*/
-	//bool operator<(const TNode& other) const;
+	// Less-than comparison, so TNode will work in std::priority_queue
+	
+	bool operator<(const TNode& other) const;
+};
+
+//This is a function class for the priority queue that handles
+//the words themselves, where frequency is important
+//usually only maxfreq is compared
+class TNodeComp
+{
+public:
+	bool operator()(TNode* lhs, TNode* rhs) const {
+		return lhs->freq < rhs->freq;
+	}
 };
 
 class DictionaryTrie
@@ -71,10 +84,13 @@ public:
   /* Destructor */
   ~DictionaryTrie();
 
+
+  
+
 private:
 	TNode* root;
-	
 	static void deleteAll(TNode* n);
+	TNode* findPrefix(std::string prefix);
 };
 
 

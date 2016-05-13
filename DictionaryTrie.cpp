@@ -1,5 +1,6 @@
 #include "util.hpp"
 #include "DictionaryTrie.hpp"
+#include <queue>
 
 /* Create a new Dictionary that uses a Trie back end */
 DictionaryTrie::DictionaryTrie() : root(0){}
@@ -10,12 +11,17 @@ DictionaryTrie::DictionaryTrie() : root(0){}
  * invalid (empty string) */
 bool DictionaryTrie::insert(std::string word, unsigned int freq)
 {
+	//if the word is already in the trie
+	//then you dont have to insert it again
 	if (find(word))
 		return false;
-
+	//empty strings are not inserted
+	if (word.length() == 0)
+		return false;
 	//start at top
 	TNode* current = root;
 	bool isword;
+	bool accepted = false;
 	//go through each letter in the string
 	for (unsigned int i = 0; i < word.length(); i++)
 	{
@@ -34,7 +40,7 @@ bool DictionaryTrie::insert(std::string word, unsigned int freq)
 		}
 		//keep on going through the list til a node is accepted
 		//for the character
-		bool accepted = false;
+		
 		while (true)
 		{
 			//if the last letter in the trie was accepted go down the middle
@@ -133,8 +139,45 @@ bool DictionaryTrie::find(std::string word) const
  */
 std::vector<std::string> DictionaryTrie::predictCompletions(std::string prefix, unsigned int num_completions)
 {
-  std::vector<std::string> words;
-  return words;
+	std::vector<std::string> words;
+	priority_queue<TNode *> que;
+	priority_queue<TNode*, vector<TNode *>, TNodeComp> wordque;
+	
+	TNode* pre = findPrefix(prefix);
+	if (pre == nullptr)
+		return words;
+	
+	que.push(pre->middle);
+
+	TNode* node;
+	while (!que.empty())
+	{
+		node = que.top();
+		que.pop();
+
+		if (node->isWord)
+		{
+			wordque.push(node);
+			if (wordque.size() == num_completions)
+				break;
+		}
+		
+		if (node->left != nullptr)
+			que.push(node->left);
+		if (node->middle != nullptr)
+			que.push(node->middle);
+		if (node->right != nullptr)
+			que.push(node->right);
+	}
+	if (pre->isWord)
+		wordque.push(pre);
+	while (!wordque.empty() && words.size() < num_completions)
+	{
+		words.push_back(wordque.top()->wholeWord);
+		wordque.pop();
+	}
+	return words;
+
 }
 
 
@@ -154,6 +197,38 @@ void DictionaryTrie::deleteAll(TNode * n)
 	delete n;
 }
 
+TNode * DictionaryTrie::findPrefix(std::string prefix)
+{
+
+	TNode* current = root;
+	for (unsigned int i = 0; i < prefix.length(); i++)
+	{
+
+		char currentChar = prefix.at(i);
+		while (true)
+		{
+			if (current == NULL) {
+				return nullptr;
+			}
+			else if (currentChar < current->text) {
+				current = current->left;
+			}
+			else if (currentChar > current->text) {
+				current = current->right;
+			}
+			else {
+				if (i == prefix.length() - 1)
+					return current;
+
+				current = current->middle;
+				break;
+			}
+
+		}
+	}
+	return nullptr;
+}
+
 //bool TNode::operator<(const TNode & other) const
 //{
 //	if (other.text < text)
@@ -166,5 +241,12 @@ TNode::TNode(char c, bool word, unsigned int fre)
 	isWord = word;
 	freq = fre;
 	wholeWord = "";
-	maxFreq = fre;
+	maxFreq = 0;
+}
+
+bool TNode::operator<(const TNode & other) const
+{
+	if (maxFreq != other.maxFreq)
+		return maxFreq < other.maxFreq;
+	return wholeWord < other.wholeWord;
 }
