@@ -171,7 +171,7 @@ std::vector<std::string> DictionaryTrie::predictCompletions(std::string prefix, 
 		if (node->right != nullptr)
 			que.push(node->right);
 	}
-	if (pre->isWord)
+	if (pre->isWord && pre->freq > pre->maxFreq)
 		wordque.push(pre);
 	while (!wordque.empty() && words.size() < num_completions)
 	{
