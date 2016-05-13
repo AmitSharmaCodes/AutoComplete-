@@ -18,7 +18,7 @@ void testStudent(std::string dict_filename){
     std::cout << "\nLoading dictionary..." << std::endl;
     DictionaryTrie* dictionary_trie = new DictionaryTrie();
 
-    Utils::load_dict(*dictionary_trie, in);
+    Utils::load_dict(*dictionary_trie, in, 10000);
 
     std::cout << "Finished loading dictionary." << std::endl;
     std::cout << "\nStarting timing tests for your solution." << std::endl;
