@@ -20,58 +20,58 @@ int main(int argc, char *argv[]) {
 	unsigned int num_iterations = atoi(argv[3]);
 	string dictfile(argv[4]);
 	ifstream in;
-	//in.open(dictfile, ios::binary);
 
-	//cout << "DictionaryBST" << endl;
-	//for (int i = 0; i < num_iterations; i++)
-	//{		
-	//	DictionaryBST dic;
-	//	Utils::load_dict(dic, in, min_size + i * step_size);
-	//	Timer time;
-	//	time.begin_timer();
-	//	for (int i = 0; i < 10000; i++) {
-	//		dic.find("blasearcv");
-	//		dic.find("bla32r");
-	//		dic.find("sea2rcv");
-	//		dic.find("zdfarcv");
-	//		dic.find("aerq34");
-	//		dic.find("..sdf");
-	//		dic.find(";+df");
-	//		dic.find("myma,oe");
-	//		dic.find("hilolerskatesnowords");
-	//		dic.find("justnonsensecannotbefound");
-	//	}
-	//	long long done = time.end_timer();
-	//	done = done / 10000;
-	//	cout << min_size + i * step_size << "\t" << done << endl;
-	//}
-	//in.close();
+	in.open(dictfile, ios::binary);
+	cout << "DictionaryBST" << endl;
+	for (int i = 0; i < num_iterations; i++)
+	{		
+		DictionaryBST dic;
+		Utils::load_dict(dic, in, min_size + i * step_size);
+		Timer time;
+		time.begin_timer();
+		for (int i = 0; i < 10000; i++) {
+			dic.find("blasearcv");
+			dic.find("bla32r");
+			dic.find("sea2rcv");
+			dic.find("zdfarcv");
+			dic.find("aerq34");
+			dic.find("..sdf");
+			dic.find(";+df");
+			dic.find("myma,oe");
+			dic.find("hilolerskatesnowords");
+			dic.find("justnonsensecannotbefound");
+		}
+		long long done = time.end_timer();
+		done = done / 10000;
+		cout << min_size + i * step_size << "\t" << done << endl;
+	}
+	in.close();
 
-	//in.open(dictfile, ios::binary);
-	//cout << "DictionaryHashtable" << endl;
-	//for (int i = 0; i < num_iterations; i++)
-	//{
-	//	DictionaryHashtable dic;
-	//	Utils::load_dict(dic, in, min_size + i * step_size);
-	//	Timer time;
-	//	time.begin_timer();
-	//	for (int i = 0; i < 10000; i++) {
-	//		dic.find("blasearcv");
-	//		dic.find("bla32r");
-	//		dic.find("sea2rcv");
-	//		dic.find("zdfarcv");
-	//		dic.find("aerq34");
-	//		dic.find("..sdf");
-	//		dic.find(";+df");
-	//		dic.find("myma,oe");
-	//		dic.find("hilolerskatesnowords");
-	//		dic.find("justnonsensecannotbefound");
-	//	}
-	//	long long done = time.end_timer();
-	//	done = done / 10000;
-	//	cout << min_size + i * step_size << "\t" << done << endl;
-	//}
-	//in.close();
+	in.open(dictfile, ios::binary);
+	cout << "DictionaryHashtable" << endl;
+	for (int i = 0; i < num_iterations; i++)
+	{
+		DictionaryHashtable dic;
+		Utils::load_dict(dic, in, min_size + i * step_size);
+		Timer time;
+		time.begin_timer();
+		for (int i = 0; i < 10000; i++) {
+			dic.find("blasearcv");
+			dic.find("bla32r");
+			dic.find("sea2rcv");
+			dic.find("zdfarcv");
+			dic.find("aerq34");
+			dic.find("..sdf");
+			dic.find(";+df");
+			dic.find("myma,oe");
+			dic.find("hilolerskatesnowords");
+			dic.find("justnonsensecannotbefound");
+		}
+		long long done = time.end_timer();
+		done = done / 10000;
+		cout << min_size + i * step_size << "\t" << done << endl;
+	}
+	in.close();
 
 
 	in.open(dictfile, ios::binary);
