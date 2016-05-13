@@ -91,7 +91,6 @@ bool DictionaryTrie::insert(std::string word, unsigned int freq)
 			}
 		}
 	}
-	delete current;
 	return true;
 }
 

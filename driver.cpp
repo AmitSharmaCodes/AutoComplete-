@@ -12,7 +12,7 @@
 //	DictionaryBST dic3;
 //
 //
-//	dic.insert("apple", 20);
+//	dic.insert("basketball", 20);
 //	dic.insert("append", 400);
 //	dic.insert("apply", 30);
 //	dic.insert("ambiant", 20);
@@ -22,22 +22,21 @@
 //	dic.insert("bat", 5);
 //	dic.insert("blue", 5);
 //
+//	if (!dic.insert("basketball", 20))
+//		cout << "didnt insert basketball again";
 //
-//	//if (dic.find("apple"))
-//	//	cout << "apple found" << endl;
-//	//if (dic.find("bat"))
-//	//	cout << "bat found" << endl;
-//	//if (dic.find("blue"))
-//	//	cout << "blue found" << endl;
-//	//if (!dic.find("blu"))
-//	//	cout << "blu is not found" << endl;
+//	if (dic.find("apple"))
+//		cout << "apple found" << endl;
+//	if (dic.find("bat"))
+//		cout << "bat found" << endl;
+//	if (dic.find("blue"))
+//		cout << "blue found" << endl;
+//	if (!dic.find("blu"))
+//		cout << "blu is not found" << endl;
 //
-//	//if (!dic.insert("apple", 5))
-//	//	cout << "apple cannot be inserted again" << endl;
+//	if (!dic.insert("apple", 5))
+//		cout << "apple cannot be inserted again" << endl;
 //
-//	vector<string> words = dic.predictCompletions("app", 2);
 //
-//	for (string s : words)
-//		cout << s << endl;
 //	return 0;
 //}
