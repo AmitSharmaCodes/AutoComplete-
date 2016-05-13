@@ -157,8 +157,7 @@ std::vector<std::string> DictionaryTrie::predictCompletions(std::string prefix, 
 	{
 		node = que.top();
 		que.pop();
-
-		
+	
 		if (node->left != nullptr)
 			que.push(node->left);
 		if (node->middle != nullptr)
@@ -166,21 +165,18 @@ std::vector<std::string> DictionaryTrie::predictCompletions(std::string prefix, 
 		if (node->right != nullptr)
 			que.push(node->right);
 
-
 		if (node->isWord)
 		{
 			wordque.push(node);
-			if (wordque.size() == num_completions) {
-				if (que.size() == 0)
-					break;
-				else if (wordque.top()->freq >= que.top()->maxFreq) {
+			/*if (wordque.size() == num_completions) {
+				if (wordque.top()->freq >= node->maxFreq) {
 					break;
 				}
 				else
 				{
 					wordque.pop();
 				}
-			}
+			}*/
 		}
 
 	}
