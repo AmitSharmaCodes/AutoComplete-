@@ -43,11 +43,18 @@ public:
 //This is a function class for the priority queue that handles
 //the words themselves, where frequency is important
 //usually only maxfreq is compared
-class TNodeComp
+class TNodeCompMinFrequency
 {
 public:
 	bool operator()(TNode* lhs, TNode* rhs) const {
 		return lhs->freq > rhs->freq;
+	}
+};
+class TNodeCompMaxFrequency
+{
+public:
+	bool operator()(TNode* lhs, TNode* rhs) const {
+		return lhs->freq < rhs->freq;
 	}
 };
 
@@ -87,6 +94,8 @@ public:
    */
   std::vector<std::string>
   predictCompletions(std::string prefix, unsigned int num_completions);
+  std::vector<std::string>
+  predictCompletionsExhaustive(std::string prefix, unsigned int num_completions);
 
   /* Destructor */
   ~DictionaryTrie();

@@ -144,7 +144,7 @@ std::vector<std::string> DictionaryTrie::predictCompletions(std::string prefix, 
 {
 	std::vector<std::string> words;
 	priority_queue<TNode *, vector<TNode*>, TNodeCompMaxFreq> que;
-	priority_queue<TNode*, vector<TNode *>, TNodeComp> wordque;
+	priority_queue<TNode*, vector<TNode *>, TNodeCompMinFrequency> wordque;
 	
 	TNode* pre = findPrefix(prefix);
 	if (pre == nullptr)
@@ -194,6 +194,53 @@ std::vector<std::string> DictionaryTrie::predictCompletions(std::string prefix, 
 	return words;
 
 }
+
+std::vector<std::string> DictionaryTrie::predictCompletionsExhaustive(std::string prefix, unsigned int num_completions)
+{
+	std::vector<std::string> words;
+	priority_queue<TNode *, vector<TNode*>, TNodeCompMaxFreq> que;
+	priority_queue<TNode*, vector<TNode *>, TNodeCompMinFrequency> wordque;
+
+	TNode* pre = findPrefix(prefix);
+	if (pre == nullptr)
+		return words;
+
+	que.push(pre->middle);
+
+	TNode* node;
+	while (!que.empty())
+	{
+		node = que.top();
+		que.pop();
+
+		if (node->left != nullptr)
+			que.push(node->left);
+		if (node->middle != nullptr)
+			que.push(node->middle);
+		if (node->right != nullptr)
+			que.push(node->right);
+
+		if (node->isWord)
+		{
+			wordque.push(node);
+		}
+
+	}
+	if (pre->isWord) {
+		wordque.push(pre);
+	}
+	while (wordque.size() > num_completions)
+		wordque.pop();
+
+	while (!wordque.empty() && words.size() < num_completions)
+	{
+		words.insert(words.begin(), wordque.top()->wholeWord);
+		wordque.pop();
+	}
+	return words;
+
+}
+
 
 
 
