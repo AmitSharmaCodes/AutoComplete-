@@ -47,7 +47,7 @@ class TNodeComp
 {
 public:
 	bool operator()(TNode* lhs, TNode* rhs) const {
-		return lhs->freq < rhs->freq;
+		return lhs->freq > rhs->freq;
 	}
 };
 

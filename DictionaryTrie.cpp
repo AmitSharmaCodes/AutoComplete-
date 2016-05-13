@@ -157,12 +157,6 @@ std::vector<std::string> DictionaryTrie::predictCompletions(std::string prefix, 
 		node = que.top();
 		que.pop();
 
-		if (node->isWord)
-		{
-			wordque.push(node);
-			if (wordque.size() == num_completions)
-				break;
-		}
 		
 		if (node->left != nullptr)
 			que.push(node->left);
@@ -170,12 +164,34 @@ std::vector<std::string> DictionaryTrie::predictCompletions(std::string prefix, 
 			que.push(node->middle);
 		if (node->right != nullptr)
 			que.push(node->right);
+
+
+		if (node->isWord)
+		{
+			wordque.push(node);
+			if (wordque.size() == num_completions) {
+				if (que.size() == 0)
+					break;
+				else if (wordque.top()->freq >= que.top()->maxFreq) {
+					break;
+				}
+				else
+				{
+					wordque.pop();
+				}
+			}
+		}
+
 	}
-	if (pre->isWord && pre->freq > pre->maxFreq)
+	if (pre->isWord) {
 		wordque.push(pre);
+	}
+	while (wordque.size() > num_completions)
+		wordque.pop();
+
 	while (!wordque.empty() && words.size() < num_completions)
 	{
-		words.push_back(wordque.top()->wholeWord);
+		words.insert(words.begin(), wordque.top()->wholeWord);
 		wordque.pop();
 	}
 	return words;
