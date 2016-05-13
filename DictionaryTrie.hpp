@@ -89,6 +89,7 @@ public:
 
 private:
 	TNode* root;
+
 	static void deleteAll(TNode* n);
 	TNode* findPrefix(std::string prefix);
 };

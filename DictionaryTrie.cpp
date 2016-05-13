@@ -3,7 +3,9 @@
 #include <queue>
 
 /* Create a new Dictionary that uses a Trie back end */
-DictionaryTrie::DictionaryTrie() : root(0){}
+DictionaryTrie::DictionaryTrie(){
+	root = nullptr;
+}
 
 /* Insert a word with its frequency into the dictionary.
  * Return true if the word was inserted, and false if it
@@ -89,6 +91,7 @@ bool DictionaryTrie::insert(std::string word, unsigned int freq)
 			}
 		}
 	}
+	delete current;
 	return true;
 }
 
