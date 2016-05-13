@@ -61,7 +61,7 @@ bool DictionaryTrie::insert(std::string word, unsigned int freq)
 			if (currentChar < current->text)
 			{
 				if (current->left == NULL)
-					current->left = new TNode(currentChar, false, freq);
+					current->left = new TNode(currentChar, isword, freq);
 				if (current->maxFreq < freq)
 					current->maxFreq = freq;
 				current = current->left;
@@ -71,7 +71,7 @@ bool DictionaryTrie::insert(std::string word, unsigned int freq)
 			else if (currentChar > current->text)
 			{
 				if (current->right == NULL)
-					current->right = new TNode(currentChar, false, freq);
+					current->right = new TNode(currentChar, isword, freq);
 				if (current->maxFreq < freq)
 					current->maxFreq = freq;
 				current = current->right;
