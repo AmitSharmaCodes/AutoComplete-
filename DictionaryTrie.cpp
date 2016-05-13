@@ -85,7 +85,7 @@ bool DictionaryTrie::insert(std::string word, unsigned int freq)
 					current->isWord = true;
 					current->freq = freq;
 					current->wholeWord = word;
-					cout << current->freq << " " << current->wholeWord;
+					cout << current->freq << " " << current->wholeWord << endl;
 				}
 				accepted = true;
 				break;
