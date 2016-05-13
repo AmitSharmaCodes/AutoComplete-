@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
 
 	in.open(dictfile, ios::binary);
 	cout << "DictionaryBST" << endl;
-	for (int i = 0; i < num_iterations; i++)
+	for (unsigned int i = 0; i < num_iterations; i++)
 	{		
 		DictionaryBST dic;
 		Utils::load_dict(dic, in, min_size + i * step_size);
@@ -52,7 +52,7 @@ int main(int argc, char *argv[]) {
 
 	in.open(dictfile, ios::binary);
 	cout << "DictionaryHashtable" << endl;
-	for (int i = 0; i < num_iterations; i++)
+	for (unsigned int i = 0; i < num_iterations; i++)
 	{
 		DictionaryHashtable dic;
 		Utils::load_dict(dic, in, min_size + i * step_size);
@@ -79,7 +79,7 @@ int main(int argc, char *argv[]) {
 	cout << endl;
 	in.open(dictfile, ios::binary);
 	cout << "DictionaryTrie" << endl;
-	for (int i = 0; i < num_iterations; i++)
+	for (unsigned int i = 0; i < num_iterations; i++)
 	{
 		DictionaryTrie dic;
 		Utils::load_dict(dic, in, min_size + i * step_size);
