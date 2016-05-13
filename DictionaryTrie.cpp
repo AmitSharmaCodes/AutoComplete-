@@ -244,6 +244,9 @@ TNode::TNode(char c, bool word, unsigned int fre)
 	freq = fre;
 	wholeWord = "";
 	maxFreq = 0;
+	right = nullptr;
+	left = nullptr;
+	middle = nullptr;
 }
 
 bool TNode::operator<(const TNode & other) const

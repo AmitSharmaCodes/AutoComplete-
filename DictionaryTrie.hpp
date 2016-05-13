@@ -28,7 +28,6 @@ public:
 	TNode* left;
 	TNode* right;
 	TNode* middle;
-	TNode* parent;
 	char text;
 	string wholeWord;
 	unsigned int maxFreq;
