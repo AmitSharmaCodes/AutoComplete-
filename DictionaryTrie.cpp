@@ -85,7 +85,7 @@ bool DictionaryTrie::insert(std::string word, unsigned int freq)
 					current->isWord = true;
 					current->freq = freq;
 					current->wholeWord = word;
-					cout << current->freq << " " << current->wholeWord << endl;
+				//	cout << current->freq << " " << current->wholeWord << endl;
 				}
 				accepted = true;
 				break;
@@ -143,7 +143,7 @@ bool DictionaryTrie::find(std::string word) const
 std::vector<std::string> DictionaryTrie::predictCompletions(std::string prefix, unsigned int num_completions)
 {
 	std::vector<std::string> words;
-	priority_queue<TNode *> que;
+	priority_queue<TNode *, vector<TNode*>, TNodeCompMaxFreq> que;
 	priority_queue<TNode*, vector<TNode *>, TNodeComp> wordque;
 	
 	TNode* pre = findPrefix(prefix);

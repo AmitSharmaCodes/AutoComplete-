@@ -51,6 +51,14 @@ public:
 	}
 };
 
+class TNodeCompMaxFreq
+{
+public:
+	bool operator()(TNode* lhs, TNode* rhs) const {
+		return lhs->maxFreq < rhs->maxFreq;
+	}
+};
+
 class DictionaryTrie
 {
 public:
